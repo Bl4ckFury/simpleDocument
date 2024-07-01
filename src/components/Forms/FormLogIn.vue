@@ -22,11 +22,11 @@ const checkForm = () => {
     <form @submit.prevent class="form">
         <span v-if="realy" class="error">Не все поля заполнены</span>
         <label for="">Логин</label>
-        <input type="text" class="input first">
+        <input v-model="login" type="text" class="input first">
         <label for="">Пароль</label>
-        <input type="password" class="input">
+        <input v-model="password" type="password" class="input">
         <div class="block-btn">
-            <input type="button" value="Войти" class="submit">
+            <input type="button" @click="checkForm" value="Войти" class="submit">
             <RouterLink class="registration" to="/registration">Регистрация</RouterLink>
         </div>
     </form>
@@ -54,6 +54,7 @@ const checkForm = () => {
         align-items: center;
         flex-direction: column;
         justify-content: center;
+
         .error {
             color: red;
             font-size: 20px;

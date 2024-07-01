@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import { ref } from 'vue';
 import axios from "axios";
 
 const store = createStore({
@@ -40,27 +39,38 @@ const store = createStore({
           status: 'готов',
           description: 'Ладно',
           download: 'https://example.com/download3'
-        }
-      ]
-  },
-  getters: {
-  },
-  mutations: {
-    createDocument(state, document) {
-      console.log('create');
-      state.documents = [...state.documents, {
-        id: 5,
+        },
+        {
+          id: 5,
           name: 'Название 5',
           author: 'Автор 5',
-          date: '2023-01-04',
+          date: '2023-01-05',
           status: 'готов',
-          description: 'Ладно',
+          description: 'Принято',
           download: 'https://example.com/download3'
+        }
+      ],
+      selectedDocument: null
+  },
+  getters: {},
+  mutations: {
+    createDocument(state, document) {
+      state.documents = [...state.documents, {
+        id: state.documents.length,
+        ...document
       }];
-    }, 
-    deleteDocument(state, id) {
-      state.documents = [...state.documents.filter(document => document.id !== id)]
-    }
+    },
+    setSelected(state, id) {
+      state.selectedDocument = id;
+    },
+    deleteDocument(state) {
+      state.documents = [...state.documents.filter(document => document.id !== state.selectedDocument)];
+    },
+    editDocument(state, document) {
+      const index = state.documents.findIndex(document => document.id === state.selectedDocument);
+
+      state.documents[index] = document;
+    },
   },
   actions: {}
 });

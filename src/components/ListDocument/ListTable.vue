@@ -2,7 +2,6 @@
 import { useStore } from 'vuex';
 import Download from '../icons/Download.vue';
 const store = useStore();
-const documents = store.state.documents;
 defineProps({
     document: Array
 })
@@ -21,17 +20,17 @@ defineProps({
         <th class="table-thead__th">Скачать</th>
     </thead>
     <tbody 
-        v-for="document in documents" 
-        :key="documents.id">
+        v-for="document in store.state.documents" 
+        :key="document.id">
         <tr>
             <td>
-                <input type="checkbox">
+                <input @click="store.commit('setSelected', document.id)" name="document" type="radio">
             </td>
-            <td>{{ document.name }}</td>
-            <td>{{ document.author }}</td>
-            <td>{{ document.date }}</td>
-            <td>{{ document.status }}</td>
-            <td>{{ document.description }}</td>
+            <td class="limitation">{{ document.name }}</td>
+            <td class="limitation">{{ document.author }}</td>
+            <td class="limitation">{{ document.date }}</td>
+            <td class="limitation">{{ document.status }}</td>
+            <td class="limitation">{{ document.description }}</td>
             <td class="td-download"><a href="#">
                   <Download /></a></td>
         </tr>
@@ -46,6 +45,10 @@ defineProps({
     flex: 1;
     border-spacing: 2px;
     border-color: rgb(0, 0, 0);
+    .limitation {
+        max-width: 400px;
+        word-wrap: break-word;
+    }
 
     .table-thead__th {
         margin-right: 10px;

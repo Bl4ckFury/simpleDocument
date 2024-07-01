@@ -1,14 +1,16 @@
 <script setup>
+import PopupGoodRef from "../UI/PopupGoodReg.vue";
 import {
     ref
 } from 'vue';
 
 const login = ref('')
 const password = ref('')
+const repPassword = ref('')
 const realy = ref(false)
 
 const checkForm = () => {
-    if (login.value == '' || password.value == '') {
+    if (login.value == '' || password.value == '' || repPassword.value == '') {
         realy.value = true;
     } else {
         realy.value = false;
@@ -20,12 +22,15 @@ const checkForm = () => {
 <div class="container">
     <h3 class="title3">Регистрация</h3>
     <div class="container">
+        <PopupGoodRef />
         <form @submit.prevent class="form">
-            <span v-if="realy" :class="{'error': login == '' || password == ''}">Не все поля заполнены</span>
+            <span v-if="realy" class="error">Не все поля заполнены</span>
             <label for="">Введите почту или номер телефона</label>
             <input type="text" v-model="login" class="input first">
             <label for="">Придумайте пароль</label>
             <input type="password" v-model="password" class="input">
+            <label for="">Повторите пароль</label>
+            <input type="password" v-model="repPassword" class="input">
             <div class="block-btn">
                 <input type="button" @click="checkForm" value="Зарегистрироваться" class="submit">
                 <RouterLink class="registration" to="/log-out">Авторизоваться</RouterLink>

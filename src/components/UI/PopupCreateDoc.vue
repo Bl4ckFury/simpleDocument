@@ -1,23 +1,31 @@
 <script setup>
-import { useStore } from 'vuex';
 import Close from '../icons/Close.vue';
+import {
+    useStore
+} from 'vuex';
+import {
+    reactive,
+    ref
+} from 'vue';
 defineProps({
     isActive: Boolean
 })
 const store = useStore();
-// const document = defineModel({
-//           id: 5,
-//           name: 'Название 5',
-//           author: 'Автор 5',
-//           date: '2023-01-04',
-//           status: 'готов',
-//           description: 'Ладно',
-//           download: 'https://example.com/download3'
-// })
+const defaultDocument = reactive({
+    name: '',
+    author: '',
+    date: '',
+    status: '',
+    description: '',
+    download: ''
+})
+const document = reactive({...defaultDocument})
 
-const createDocument = () => {
-    store.commit('createDocument');
-}
+const createDocument = ($emit) => {
+    store.commit('createDocument', document);
+    $emit('close-modal');
+    Object.assign(document, defaultDocument);
+};
 </script>
 
 <template>
@@ -31,18 +39,23 @@ const createDocument = () => {
         </div>
         <div class="create-modal">
             <label class="create-modal__label" for="">Название документа</label>
-            <input class="create-modal__input" type="text">
+            <input v-model="document.name" class="create-modal__input" type="text">
             <label class="create-modal__label" for="">Автор</label>
-            <input class="create-modal__input" type="text">
+            <input v-model="document.author" class="create-modal__input" type="text">
             <label class="create-modal__label" for="">Дата создания</label>
-            <input class="create-modal__input" type="date" name="" id="">
-            <label class="create-modal__label" for="">Статус</label>
-            <input class="create-modal__input" type="text">
+            <input v-model="document.date" class="create-modal__input" type="date" name="" id="">
             <label class="create-modal__label" for="">Описание</label>
+            <textarea class="create-modal__label" v-model="document.description"></textarea>
             <input class="file" type="file">
-            <label class="create-modal__label" for="">Описание</label>
-            <textarea class="create-modal__label" name="" id=""></textarea>
-            <button @click="createDocument" class="create-btn">Создать</button>
+            <label class="create-modal__label" for="">Статус</label>
+            <select name="status" id="status" v-model="document.status" class="create-bottom__search">
+                <option selected disabled value="">Выберете статус</option>
+                <option value="Готов">Готов</option>
+                <option value="Отклонен">Отклонен</option>
+                <option value="В процессе">В процессе</option>
+                <option value="Ожидает подтверждения">Ожидает подтверждения</option>
+            </select>
+            <button @click="createDocument($emit)" class="create-btn">Создать</button>
         </div>
     </div>
 </div>
@@ -71,6 +84,7 @@ const createDocument = () => {
         opacity: 1;
         pointer-events: all;
     }
+
     .create-modal__bg {
         padding: 50px;
         padding-top: 0px;
@@ -99,24 +113,43 @@ const createDocument = () => {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    .create-btn {
-            font-size: 18px;
-            height: 50px;
-            width: 200px;
-            color: $white;
+
+    .create-bottom__search {
+        margin-bottom: 30px;
+        font-weight: 500;
+        color: $main;
+        border: none;
+        width: 300px;
+        outline: none;
+        margin-left: 0px;
+        padding: 8px 16px;
+        border-bottom: 1px solid $main;
+        background-color: transparent;
+
+        &:focus {
             outline: none;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            background-color: $main;
-            border: 1px solid $main;
-            padding: 8px 16px;
-            transition: all .2s ease-in-out;
-            &:hover {
-                color: $main;
-                background-color: $white;
-            }
-        } 
+        }
+    }
+
+    .create-btn {
+        font-size: 18px;
+        height: 50px;
+        width: 200px;
+        color: $white;
+        outline: none;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: $main;
+        border: 1px solid $main;
+        padding: 8px 16px;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            color: $main;
+            background-color: $white;
+        }
+    }
 
     .create-modal__label {
         font-size: 18px;

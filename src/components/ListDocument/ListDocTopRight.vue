@@ -1,14 +1,29 @@
 <script setup>
+import { useStore } from 'vuex';
+const store = useStore();
 
+const editDocument = () => {
+    const document =         {
+        id: 4,
+        name: 'new',
+        author: 'new',
+        date: '2023-01-04',
+        status: 'готов',
+        description: 'new',
+        download: 'https://example.com/download3'
+    }
+
+    store.commit('editDocument', document);
+}
 </script>
 
 <template>
 <div class="create-bottom">
     <input type="search" class="create-bottom__search" placeholder="Поиск документа">
     <button class="create-bottom__btn">Поиск</button>
-    <button class="create-bottom__btn">Редактировать</button>
+    <button @click="editDocument" class="create-bottom__btn">Редактировать</button>
     <button class="create-bottom__btn">Отправить</button>
-    <button class="create-bottom__btn">Удалить</button>
+    <button @click="store.commit('deleteDocument')" class="create-bottom__btn">Удалить</button>
 </div>
 </template>
 
