@@ -2,6 +2,10 @@
 import { useStore } from 'vuex';
 import Download from '../icons/Download.vue';
 const store = useStore();
+const documents = store.state.documents;
+defineProps({
+    document: Array
+})
 
 </script>
 
@@ -17,8 +21,8 @@ const store = useStore();
         <th class="table-thead__th">Скачать</th>
     </thead>
     <tbody 
-        v-for="document in store.documents" 
-        :key="store.documents.id">
+        v-for="document in documents" 
+        :key="documents.id">
         <tr>
             <td>
                 <input type="checkbox">

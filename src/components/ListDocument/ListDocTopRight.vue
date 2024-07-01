@@ -39,6 +39,7 @@
     }
 
     .create-bottom__btn {
+        margin-bottom: 10px;
         font-size: 18px;
         height: 60px;
         width: 300px;

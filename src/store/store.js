@@ -1,9 +1,9 @@
 import { createStore } from 'vuex'
 import { ref } from 'vue';
+import axios from "axios";
 
 const store = createStore({
-  state() {
-    return {
+  state: {
       documents: [
         {
           id: 1,
@@ -42,15 +42,27 @@ const store = createStore({
           download: 'https://example.com/download3'
         }
       ]
-    }
+  },
+  getters: {
   },
   mutations: {
-    createDocument() {
-      this.documents.push();
+    createDocument(state, document) {
+      console.log('create');
+      state.documents = [...state.documents, {
+        id: 5,
+          name: 'Название 5',
+          author: 'Автор 5',
+          date: '2023-01-04',
+          status: 'готов',
+          description: 'Ладно',
+          download: 'https://example.com/download3'
+      }];
+    }, 
+    deleteDocument(state, id) {
+      state.documents = [...state.documents.filter(document => document.id !== id)]
     }
   },
-  actions: {},
-  getters: {}
+  actions: {}
 });
 
 export default store;

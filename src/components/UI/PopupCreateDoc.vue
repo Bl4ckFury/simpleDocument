@@ -1,8 +1,23 @@
 <script setup>
+import { useStore } from 'vuex';
 import Close from '../icons/Close.vue';
 defineProps({
     isActive: Boolean
 })
+const store = useStore();
+// const document = defineModel({
+//           id: 5,
+//           name: 'Название 5',
+//           author: 'Автор 5',
+//           date: '2023-01-04',
+//           status: 'готов',
+//           description: 'Ладно',
+//           download: 'https://example.com/download3'
+// })
+
+const createDocument = () => {
+    store.commit('createDocument');
+}
 </script>
 
 <template>
@@ -27,7 +42,7 @@ defineProps({
             <input class="file" type="file">
             <label class="create-modal__label" for="">Описание</label>
             <textarea class="create-modal__label" name="" id=""></textarea>
-            <button class="create-btn">Создать</button>
+            <button @click="createDocument" class="create-btn">Создать</button>
         </div>
     </div>
 </div>

@@ -3,7 +3,6 @@ import PopupCreateDoc from '../UI/PopupCreateDoc.vue';
 import {
     ref
 } from 'vue';
-
 const isShowModal = ref(false);
 
 </script>
