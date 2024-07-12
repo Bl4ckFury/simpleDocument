@@ -1,28 +1,30 @@
 <script setup>
-import { useStore } from 'vuex';
-const store = useStore();
+    import { ref } from 'vue';
+    import { useStore } from 'vuex';
 
-const editDocument = () => {
-    const document =         {
-        id: 4,
-        name: 'new',
-        author: 'new',
-        date: '2023-01-04',
-        status: 'готов',
-        description: 'new',
-        download: 'https://example.com/download3'
-    }
+    import PopupEditDoc from '../UI/PopupEditDoc.vue';
+    import PopupSubmitDoc from '../UI/PopupSubmitDoc.vue';
 
-    store.commit('editDocument', document);
-}
+    const store = useStore();
+    
+    const isPopupEditActive = ref(false);
+    const submit = ref(false);
 </script>
 
 <template>
 <div class="create-bottom">
+    <PopupEditDoc 
+        :isActive="isPopupEditActive"
+        @close-modal="isPopupEditActive=false"
+    />
+    <PopupSubmitDoc 
+        :isActive="submit"
+        @close-modal="submit=false" 
+    />
     <input type="search" class="create-bottom__search" placeholder="Поиск документа">
     <button class="create-bottom__btn">Поиск</button>
-    <button @click="editDocument" class="create-bottom__btn">Редактировать</button>
-    <button class="create-bottom__btn">Отправить</button>
+    <button @click="isPopupEditActive=true" class="create-bottom__btn">Редактировать</button>
+    <button @click="openSubmitPopup" class="create-bottom__btn">Отправить</button>
     <button @click="store.commit('deleteDocument')" class="create-bottom__btn">Удалить</button>
 </div>
 </template>

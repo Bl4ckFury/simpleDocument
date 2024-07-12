@@ -12,6 +12,7 @@ import { ref } from 'vue';
         <input type="search" class="create-bottom__search" placeholder="Поиск по описанию">
         <select name="status" id="status" class="create-bottom__search">
             <option selected disabled value="">Выберете статус</option>
+            <option value="new">Новый</option>
             <option value="ready">Готов</option>
             <option value="rejected">Отклонен</option>
             <option value="progress">В процессе</option>

@@ -9,8 +9,8 @@ const router = createRouter({
       component: () => import('../views/HomeDocument.vue')
     },
     {
-      path: '/list-documet',
-      name: 'list-documet',
+      path: '/list-document',
+      name: 'list-document',
       component: () => import('../views/ListDocument.vue')
     },
     {
@@ -19,24 +19,9 @@ const router = createRouter({
       component: () => import('../views/SearchFilterDocument.vue')
     },
     {
-      path: '/submit-document',
-      name: 'submit-document',
-      component: () => import('../views/SubmitDocument.vue')
-    },
-    {
       path: '/settings-document',
       name: 'settings-document',
       component: () => import('../views/SettingsDocument.vue')
-    },
-    {
-      path: '/log-out',
-      name: 'log-out',
-      component: () => import('../views/LogInDocument.vue')
-    },
-    {
-      path: '/registration',
-      name: 'registration',
-      component: () => import('../views/RegistrationDocument.vue')
     },
   ]
 })

@@ -1,24 +1,21 @@
 <script setup>
-import ListDocTopRight from '../components/ListDocument/ListDocTopRight.vue';
-import ListDocBottom from '../components/ListDocument/ListDocBottom.vue';
-import ListDocTop from '../components/ListDocument/ListDocTop.vue';
-import ListTable from '../components/ListDocument/ListTable.vue';
-
+    import ListDocTop from '@/components/ListDocument/ListDocTop.vue';
+    import ListDocBottom from '@/components/ListDocument/ListDocBottom.vue';
+    import ListTable from '@/components/ListDocument/ListTable.vue';
+    import ListDocTopRight from '@/components/ListDocument/ListDocTopRight.vue';
 </script>
 
 <template>
-<div class="list-doc">
-    <div class="list-doc__top">
-        <div>
-            <ListDocTop />
-            <ListDocBottom />
+    <div class="list-doc">
+        <div class="list-doc__top">
+            <div>
+                <ListDocTop />
+                <ListDocBottom />
+            </div>
+            <ListTable />
+            <ListDocTopRight />
         </div>
-        <ListTable />
-        <ListDocTopRight />
     </div>
-    
-
-</div>
 </template>
 
 <style lang="scss" scoped>

@@ -7,10 +7,13 @@ import {
     reactive,
     ref
 } from 'vue';
+
 defineProps({
     isActive: Boolean
 })
+
 const store = useStore();
+
 const defaultDocument = reactive({
     name: '',
     author: '',

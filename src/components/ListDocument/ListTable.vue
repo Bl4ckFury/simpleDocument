@@ -1,41 +1,45 @@
 <script setup>
-import { useStore } from 'vuex';
-import Download from '../icons/Download.vue';
+import { useStore } from "vuex";
+import Download from "../icons/Download.vue";
 const store = useStore();
 defineProps({
-    document: Array
-})
-
+    document: Array,
+});
 </script>
 
 <template>
-<table class="table">
-    <thead class="table-thead" >
-        <th class="table-thead__th"></th>
-        <th class="table-thead__th">Название документа</th>
-        <th class="table-thead__th">Автор</th>
-        <th class="table-thead__th">Дата создания</th>
-        <th class="table-thead__th">Статус</th>
-        <th class="table-thead__th">Описание</th>
-        <th class="table-thead__th">Скачать</th>
-    </thead>
-    <tbody 
-        v-for="document in store.state.documents" 
-        :key="document.id">
-        <tr>
-            <td>
-                <input @click="store.commit('setSelected', document.id)" name="document" type="radio">
-            </td>
-            <td class="limitation">{{ document.name }}</td>
-            <td class="limitation">{{ document.author }}</td>
-            <td class="limitation">{{ document.date }}</td>
-            <td class="limitation">{{ document.status }}</td>
-            <td class="limitation">{{ document.description }}</td>
-            <td class="td-download"><a href="#">
-                  <Download /></a></td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <thead class="table-thead">
+            <tr>
+                <th class="table-thead__th"></th>
+                <th class="table-thead__th">Название документа</th>
+                <th class="table-thead__th">Автор</th>
+                <th class="table-thead__th">Дата создания</th>
+                <th class="table-thead__th">Статус</th>
+                <th class="table-thead__th">Описание</th>
+                <th class="table-thead__th">Скачать</th>
+            </tr>
+        </thead>
+        <tbody v-for="document in store.state.documents" :key="document.id">
+            <tr>
+                <td>
+                    <input
+                        @click="store.commit('setSelected', document)"
+                        name="document"
+                        type="radio"
+                    />
+                </td>
+                <td class="limitation">{{ document.name }}</td>
+                <td class="limitation">{{ document.author }}</td>
+                <td class="limitation">{{ document.date }}</td>
+                <td class="limitation">{{ document.status }}</td>
+                <td class="limitation">{{ document.description }}</td>
+                <td class="td-download">
+                    <a href="#"> <Download /></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <style lang="scss" scoped>
@@ -57,7 +61,6 @@ defineProps({
     .td-download {
         text-align: center;
     }
-
 }
 
 table,

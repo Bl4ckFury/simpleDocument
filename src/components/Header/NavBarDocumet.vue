@@ -1,9 +1,9 @@
 <script setup>
-import HeaderLink from "./HeaderLink.vue"
+import HeaderLink from "./HeaderLink.vue";
 </script>
 
 <template>
-<HeaderLink />
+    <HeaderLink />
 </template>
 
 <style lang="scss">

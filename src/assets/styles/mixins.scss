@@ -1,0 +1,35 @@
+@mixin main-btn {
+    font-size: 18px;
+    height: 60px;
+    width: 300px;
+    color: $white;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: $main;
+    border: 1px solid $main;
+    padding: 8px 16px;
+    transition: all .2s ease-in-out;
+    &:hover {
+        color: $main;
+        background-color: $white;
+    }
+}
+
+@mixin main-input {
+    margin-bottom: 30px;
+    font-weight: 500;
+    color: $main;
+    border: none;
+    width: 300px;
+    outline: none;
+    margin-left: 0px;
+    padding: 8px 16px;
+    border-bottom: 1px solid $main;
+    background-color: transparent;
+
+    &:focus {
+        outline: none;
+    }
+}
